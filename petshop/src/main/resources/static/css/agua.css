@@ -1,0 +1,12 @@
+.watermark-container {
+    position: relative;
+}
+
+.watermark {
+    position: fixed;
+    opacity: 0.2; /* Ajuste a opacidade conforme necessário */
+    top: 50%; /* Posição vertical */
+    left: 50%; /* Posição horizontal */
+    transform: translate(-50%, -50%) rotate(-10deg); /* Centralizar e rotacionar */
+    pointer-events: none; /* Evita interações com a marca d'água */
+}

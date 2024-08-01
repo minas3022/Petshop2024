@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:time="http://www.thymeleaf.org/extras/java8time">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lista</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/relatorios.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_home.css}">
+</head>
+<body>
+<header class="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Petshop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/dashboard}"><i class="fa-solid fa-clipboard"></i> Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container-fluid mt-4">
+    <h1><i class="fa-solid fa-clock-rotate-left"></i>&nbsp;Relatórios de Agendamento</h1>
+    <div class="d-block d-md-none">
+        <ul class="list-group">
+            <li class="list-group-item" th:each="entry : ${agendamentosPorDia}">
+                <strong>Horário:</strong> <span th:text="${#temporals.format(entry.key, 'dd/MM/yyyy')}"></span><br>
+                <strong>Atendimentos:</strong><br>
+                <ul>
+                    <li th:each="agendamento : ${entry.value}" th:text="${agendamento}"></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <table class="table table-bordered table-responsive-md text-center">
+        <thead class="bg-dark text-light">
+        <tr>
+            <th>Horário</th>
+            <th>Atendimentos</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${agendamentosPorDia}">
+            <td th:text="${#temporals.format(entry.key, 'dd/MM/yyyy')}">Horário</td>
+            <td>
+                <ul>
+                    <li th:each="agendamento : ${entry.value}" th:text="${agendamento}"></li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/background.js}"></script>
+</body>
+</html>
+
+
+

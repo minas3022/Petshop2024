@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Cadastro</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/header_home.css}">
+</head>
+<body>
+<header class="header">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">Petshop</a>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" th:href="@{/dashboard}"><i class="fa-solid fa-clipboard"></i> Dashboard</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/agendamentos/cadastrar}">Cadastrar</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/agendamentos/listar}">Listar</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+			</ul>
+		</div>
+	</nav>
+</header>
+<div class="container">
+	<h1 class="mt-5"><i class="fa-solid fa-address-card"></i> Agendamento</h1>
+	<form th:action="@{/agendamentos/salvar}" th:object="${agendamento}" method="post" class="mt-3">
+		<div th:replace = "fragments/validacao :: validacao"></div>
+		<div class="form-group">
+			<label for="dataHora">Data Agendamento</label>
+			<input type="datetime-local" id="dataHora" name="dataHora" class="form-control" th:field="*{dataHora}">
+			<div class="alert alert-danger mt-3" th:if="${#fields.hasErrors('dataHora')}" th:errors="*{dataHora}"></div>
+		</div>
+		<div class="form-group">
+			<label for="servico">Serviço:</label>
+			<select class="form-control" id="servico" th:field="*{servico}">
+				<option value="">Selecione..</option>
+				<option th:each="serv : ${servico}" th:value="${serv.id}" th:text="${serv.nome}"></option>
+			</select>
+			<div class="alert alert-danger mt-3" th:if="${#fields.hasErrors('servico')}" th:errors="*{servico}"></div>
+		</div>
+		<div class="form-group">
+			<label for="pet">Pet:</label>
+			<select class="form-control" id="pet" th:field="*{pet}">
+				<option value="">Selecione..</option>
+				<option th:each="p : ${pet}" th:value="${p.id}" th:text="${p.nome}"></option>
+			</select>
+			<div class="alert alert-danger mt-3" th:if="${#fields.hasErrors('pet')}" th:errors="*{pet}"></div>
+		</div>
+		<div class="form-group">
+			<label for="cliente">Cliente:</label>
+			<select class="form-control" id="cliente" th:field="*{cliente}">
+				<option value="">Selecione..</option>
+				<option th:each="cli : ${cliente}" th:value="${cli.id}" th:text="${cli.nome}"></option>
+			</select>
+			<div class="alert alert-danger" th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}"></div>
+		</div>
+		<input type="hidden" id="id" th:field="*{id}">
+		<button type="submit" class="btn btn-success">Salvar</button>
+		<a th:href="@{/dashboard}" class="btn btn-secondary">Cancelar</a>
+		<a th:href="@{/dashboard}" class="btn btn-info">Voltar</a>
+	</form>
+</div>
+</body>
+</html>
+

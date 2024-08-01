@@ -1,0 +1,17 @@
+body {
+      margin: 0;
+      padding: 0;
+      height: 100vh; /* Ocupa toda a altura da tela */
+      background-image: url('/images/fundo.jpg');
+      background-size: cover; /* Ajusta a imagem para cobrir todo o fundo */
+      background-repeat: no-repeat; /* Evita a repetição da imagem */
+      background-position: center; /* Centraliza a imagem */
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 50px;
+    }
+
+

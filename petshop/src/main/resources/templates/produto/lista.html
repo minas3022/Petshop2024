@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Listar</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/header_home.css}">
+</head>
+<body>
+<header class="header">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">Petshop</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" th:href="@{/dashboard}"><i class="fa-solid fa-clipboard"></i> Dashboard</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/produtos/cadastrar}">Cadastrar</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/produtos/listar}">Listar</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+			</ul>
+		</div>
+	</nav>
+</header>
+<div class="container-fluid mt-5">
+	<h1>Lista de Produtos</h1>
+	<form class="mb-4" method="get" th:action="@{/produtos/listar}">
+		<div class="input-group">
+			<input type="text" class="form-control" placeholder="Buscar por nome" name="nome" th:value="${param.nome}">
+			<div class="input-group-append">
+				<button class="btn btn-primary" type="submit">
+					<i class="fa-solid fa-search"></i> Buscar
+				</button>
+			</div>
+		</div>
+	</form>
+	<a th:href="@{/produtos/cadastrar}" class="btn btn-primary mb-3" >
+		<i class="fa-solid fa-square-plus"></i> <span>&nbsp;
+Produto</span>
+	</a>
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+			<tr>
+				<th>Produto</th>
+				<th>Descrição</th>
+				<th>Preço</th>
+				<th>Quantidade</th>
+				<th>Foto</th>
+				<th>Código</th>
+				<th>Ações</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="p : ${produtosPage.content}">
+				<td th:text="${p.nome}"></td>
+				<td th:text="${p.descricao}"></td>
+				<td th:text="${p.preco}"></td>
+				<td th:text="${p.quantidade}"></td>
+				<td>
+					<img th:src="@{{foto}(foto=${p.foto})}" alt="Foto do produto" style="width: 100px; height: auto;">
+				</td>
+				<td>
+					<img th:src="@{{qrcode}(qrcode=${p.qrcode})}" alt="QRcode" style="width: 100px; height: auto;">
+				</td>
+				<td>
+					<a th:href="@{/produtos/editar/{id}(id=${p.id})}" class="btn btn-warning btn-sm mx-1">Editar</a>
+					<a th:href="@{/produtos/excluir/{id}(id=${p.id})}" class="btn btn-danger btn-sm">Deletar</a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<div class="d-md-none">
+			<div th:each="p : ${produtosPage.content}" class="border p-3 mb-2">
+				<h5 th:text="${p.nome}"></h5>
+				<p><strong>Descrição:</strong> <span th:text="${p.descricao}"></span></p>
+				<p><strong>Preço:</strong> <span th:text="${p.preco}"></span></p>
+				<p><strong>Quantidade:</strong> <span th:text="${p.quantidade}"></span></p>
+				<img th:src="@{{foto}(foto=${p.foto})}" alt="Foto do produto" style="width: 100px; height: auto;">
+				<div class="mt-2">
+					<a th:href="@{/produtos/editar/{id}(id=${p.id})}" class="btn btn-warning btn-sm mx-1">Editar</a>
+					<a th:href="@{/produtos/excluir/{id}(id=${p.id})}" class="btn btn-danger btn-sm">Deletar</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<li class="page-item" th:classappend="${produtosPage.hasPrevious()} ? 'enabled' : 'disabled'">
+				<a class="page-link" th:href="@{/produtos/listar(page=${produtosPage.number - 1}, size=${produtosPage.size})}">Anterior</a>
+			</li>
+			<li class="page-item" th:each="i : ${#numbers.sequence(0, produtosPage.totalPages - 1)}" th:classappend="${produtosPage.number == i} ? 'active'">
+				<a class="page-link" th:href="@{/produtos/listar(page=${i}, size=${produtosPage.size})}" th:text="${i + 1}">1</a>
+			</li>
+			<li class="page-item" th:classappend="${produtosPage.hasNext()} ? 'enabled' : 'disabled'">
+				<a class="page-link" th:href="@{/produtos/listar(page=${produtosPage.number + 1}, size=${produtosPage.size})}">Próxima</a>
+			</li>
+		</ul>
+	</nav>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+
+</body>
+</html>
+
+
+
+

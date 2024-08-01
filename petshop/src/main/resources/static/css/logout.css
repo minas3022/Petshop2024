@@ -1,0 +1,23 @@
+    .logout-container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #72EDF2 10%, #5151E5 100%);
+      color: white;
+    }
+    .logout-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    .logout-box h2 {
+      margin-bottom: 20px;
+    }
+    .logout-box .btn {
+      color: white;
+      background-color: #007bff;
+      border-color: #007bff;
+    }

@@ -1,0 +1,7 @@
+   .atendimento-checkbox {
+        margin-left: 15px; /* Ajuste de margem, se necessário */
+        width: 20px; /* Ajuste da largura */
+        height: 20px; /* Ajuste da altura */
+        cursor: pointer; /* Mudança do cursor para pointer ao passar sobre o checkbox */
+    }
+

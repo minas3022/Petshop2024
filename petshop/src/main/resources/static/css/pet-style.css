@@ -1,0 +1,126 @@
+:root {
+    --azul-claro: #A2D5F2;
+    --verde: #81C784;
+    --laranja: #FFB74D;
+    --branco: #FFFFFF;
+    --cinza-claro: #E0E0E0;
+}
+
+body {
+    background-color: var(--cinza-claro);
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+}
+
+.header {
+    background-color: var(--azul-claro);
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header .navbar-brand {
+    font-weight: bold;
+}
+
+.hero {
+    background: url('images/hero.jpg') no-repeat center center/cover;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--branco);
+}
+
+.hero h1 {
+    font-size: 3rem;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    animation: fadeIn 2s ease-in-out 0.5s;
+}
+
+.services {
+    background-color: var(--verde);
+    color: var(--branco);
+    padding: 2rem 0;
+}
+
+.services h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.service-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.service-item {
+    background-color: var(--branco);
+    color: #333;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.service-item:hover {
+    transform: translateY(-10px);
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    max-width: 300px; /* Limita o tamanho da imagem */
+}
+
+footer {
+    background-color: var(--cinza-claro);
+    text-align: center;
+    padding: 1rem 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (min-width: 600px) {
+    h5 {
+        font-size: 3.5em;
+    }
+
+    p {
+        font-size: 2.5em;
+    }
+
+    .container div {
+        width: 80vw;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1024px) {
+    h5 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 15px;
+    }
+
+    .container div {
+        width: 50vw;
+        margin: 0 auto; /* Centraliza o div */
+    }
+}

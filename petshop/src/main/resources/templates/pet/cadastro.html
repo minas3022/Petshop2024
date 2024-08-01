@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Cadastro</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_home.css}">
+
+</head>
+<header class="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Petshop</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/dashboard}"><i class="fa-solid fa-clipboard"></i> Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/pets/cadastrar}">Cadastrar</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/pets/listar}">Listar</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main class="container">
+    <h1 class="mt-5"><i class="fa-solid fa-address-card"></i> Cadastro de Pets</h1>
+    <form th:action="@{/pets/salvar}" th:object="${pet}" method="post" class="mt-3">
+        <div th:replace = "fragments/validacao :: validacao"></div>
+        <input type="hidden" th:field="*{id}">
+
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" th:field="*{nome}" required>
+            <div class="alert alert-danger mt-3" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="especie">Espécie:</label>
+            <input type="text" class="form-control" id="especie" th:field="*{especie}">
+            <div class="alert alert-danger mt-3" th:if="${#fields.hasErrors('especie')}" th:errors="*{especie}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="raca">Raça:</label>
+            <input type="text" class="form-control" id="raca" th:field="*{raca}">
+            <div class="alert alert-danger mt-3" th:if="${#fields.hasErrors('raca')}" th:errors="*{raca}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="idade">Idade:</label>
+            <input type="number" class="form-control" id="idade" th:field="*{idade}">
+            <div class="alert alert-danger mt-3" th:if="${#fields.hasErrors('idade')}" th:errors="*{idade}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="cliente">Cliente:</label>
+            <select class="form-control" id="cliente" th:field="*{cliente}">
+                <option value="">Selecione..</option>
+                <option th:each="cli : ${cliente}" th:value="${cli.id}" th:text="${cli.nome}"></option>
+            </select>
+            <div class="alert alert-danger mt-3" th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a th:href="@{/dashboard}" class="btn btn-secondary">Cancelar</a>
+        <a th:href="@{/dashboard}" class="btn btn-info">Voltar</a>
+    </form>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js" integrity="sha384-Wf52VUmLhi7E4y4gyZb+3NL4kQg1kD5F/iF9TwB5ZBv7qZ3sibTPdW0wK4NcOq0e" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+IhAz/D4Hkp14ELGg1DZgTVoXNJjq4u1IHz" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+
+
+
+

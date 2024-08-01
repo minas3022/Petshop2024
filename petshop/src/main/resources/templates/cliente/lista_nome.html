@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Listar</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header_home.css}">
+</head>
+<body>
+<header class="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Petshop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/dashboard}"><i class="fa-solid fa-clipboard"></i> Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/clientes/cadastrar}">Cadastrar</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/clientes/listar}">Listar</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container-fluid">
+    <h1 class="mt-5">Lista de Clientes</h1>
+
+    <!-- Formulário de Pesquisa -->
+    <form class="form-inline mb-3" method="get" action="/clientes">
+        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar por nome" aria-label="Search" name="nome" th:value="${nome}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+    </form>
+
+    <!-- Mensagem de Erro -->
+    <div th:if="${param.error == 'violacao-chave-estrangeira'}" class="alert alert-danger" role="alert">
+        A exclusão do cliente não pode ser realizada porque há pets associados a ele.
+    </div>
+
+    <!-- Botão para cadastrar novo cliente -->
+    <a th:href="@{/clientes/cadastrar}" class="btn btn-primary mb-3"><i class="fa-solid fa-user-plus"></i> <span>&nbsp; Novo Cliente</span></a>
+
+    <!-- Listagem de Clientes em Tela Pequena -->
+    <div class="d-block d-md-none">
+        <ul class="list-group">
+            <li th:each="cliente : ${cliente}" class="list-group-item">
+                <strong>Nome:</strong> <span th:text="${cliente.nome}"></span><br>
+                <strong>Email:</strong> <span th:text="${cliente.email}"></span><br>
+                <strong>Telefone:</strong> <span th:text="${cliente.telefone}"></span><br>
+                <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-warning">Editar</a>
+                <a th:href="@{/clientes/excluir/{id}(id=${cliente.id})}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este cliente?')">Deletar</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Tabela de Clientes em Tela Grande -->
+    <div class="table-responsive d-none d-md-block">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cliente : ${clientes}">
+                <td th:text="${cliente.nome}"></td>
+                <td th:text="${cliente.email}"></td>
+                <td th:text="${cliente.telefone}"></td>
+                <td>
+                    <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-warning">Editar</a>
+                    <a th:href="@{/clientes/excluir/{id}(id=${cliente.id})}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este cliente?')">Deletar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

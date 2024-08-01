@@ -1,0 +1,35 @@
+body {
+    background: linear-gradient(to right, #4e54c8, #8f94fb);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.header {
+    background-color: #ffffff; /* Cor do cabeçalho */
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+}
+
+.btn-primary {
+    background: #4e54c8; /* Azul */
+    border: none;
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Cinza */
+    border-color: #6c757d; /* Cinza */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; /* Cinza mais escuro */
+}
+
